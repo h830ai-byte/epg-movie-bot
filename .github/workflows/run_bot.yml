@@ -2,8 +2,8 @@ name: EPG Movie Bot
 
 on:
   schedule:
-    - cron: '0 8 * * *' # هر روز ساعت ۸ صبح به وقت جهانی (UTC) اجرا می‌شود
-  workflow_dispatch: # به شما اجازه می‌دهد هر زمان خواستید دستی هم آن را اجرا کنید
+    - cron: '30 7 * * *' # هر روز ساعت ۱۱:۳۰ صبح به وقت ایران (۰۷:۳۰ UTC) اجرا می‌شود
+  workflow_dispatch: # اجازه اجرای دستی
 
 jobs:
   run-bot:
@@ -27,4 +27,3 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python main.py
-        
