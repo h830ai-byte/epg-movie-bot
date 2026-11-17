@@ -1,10 +1,9 @@
-name: EPG Movie Bot Advanced
+name: EPG Daily Report Bot
 
 on:
   schedule:
-    # ساعت ۳۰: ۶ به وقت UTC می‌شود ۱۰:۰۰ صبح به وقت ایران
-    # ساعت‌های بعدی برای بررسی ساعتی تا ساعت ۱۶:۰۰ (16:30 به وقت ایران معادل 13:00 به وقت UTC)
-    - cron: '30 6,7,8,9,10,11,12,13 * * *'
+    # ساعت ۱۵:۰۰ به وقت تهران معادل 11:30 به وقت UTC
+    - cron: '30 11 * * *'
   workflow_dispatch:
 
 jobs:
@@ -29,4 +28,3 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python main.py
-        
