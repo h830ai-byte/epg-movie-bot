@@ -30,8 +30,6 @@ def main():
         return
     
     soup = BeautifulSoup(response.text, 'html.parser')
-    
-    # روش جدید و مطمئن برای پیدا کردن تصاویر پست‌ها در پیش‌نمایش تلگرام
     images = soup.find_all('a', class_='tgme_widget_message_photo_wrap')
     
     if not images:
@@ -39,7 +37,6 @@ def main():
         send_telegram_message("🎬 ربات اجرا شد، اما عکسی در آخرین پست‌های کانال EPGnews یافت نشد.")
         return
     
-    # گرفتن لینک آخرین عکس
     latest_img = images[-1]
     style_attr = latest_img.get('style', '')
     
@@ -53,8 +50,14 @@ def main():
         print("لینک عکس در استایل پیدا نشد.")
         send_telegram_message("🎬 ربات اجرا شد اما لینک عکس استخراج نشد.")
         return
+    
+    # اصلاح خودکار در صورتی که حرف h اول لینک افتاده باشد
+    if img_url.startswith('ttp://') or img_url.startswith('ttps://'):
+        img_url = 'h' + img_url
+    elif img_url.startswith('//'):
+        img_url = 'https:' + img_url
         
-    print(f"لینک عکس پیدا شد: {img_url}")
+    print(f"لینک اصلاح‌شده‌ی عکس: {img_url}")
     
     # دانلود و پردازش عکس با OCR
     print("در حال دانلود تصویر...")
